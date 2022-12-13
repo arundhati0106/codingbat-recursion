@@ -1,0 +1,86 @@
+#changeHi
+-approach -> check if first 2 chars of string, substring is "hi", if yes -> return 1 + check for remaining substring (from index 2)... 1st 2 index = "hi"
+                                                                  if no  -> check for remaining substring (from index 1), eg -> hhi, first 2 -> hh, remove h, next 2 -> hi
+public int countHi(String str) {
+  if(str.length() < 2) 
+    return 0;
+    
+  if(str.substring(0,2).equals("hi"))
+    return 1 + countHi(str.substring(2));
+    
+  return countHi(str.substring(1));
+}
+
+#changeXY
+-change all 'x' into 'y' in a given string
+-appraoch -> if curr char is x, return y + check for remaining string
+          -> else, return that char + check for remaining string
+
+public String changeXY(String str) {
+  if(str.length() == 0) 
+    return "";
+    
+  if(str.charAt(0) == 'x')
+    return 'y' + changeXY(str.substring(1));
+    
+  return str.charAt(0) + changeXY(str.substring(1));
+}
+
+#changePi
+-change all 'pi' to '3.14' in a given string
+
+public String changePi(String str) {
+  if(str.length() < 2) return str;
+  
+  if(str.substring(0,2).equals("pi"))
+    return "3.14" + changePi(str.substring(2));
+  
+  return str.charAt(0) + changePi(str.substring(1));
+}
+
+#noX
+-remove all 'x' chars from string. return
+-approach -> if curr char is x, check from next char
+          -> else, add it to string and then check from next char
+           
+public String noX(String str) {
+  if(str.length() == 0) 
+    return "";
+  
+  if(str.charAt(0) == 'x') 
+    return noX(str.substring(1));
+    
+  return str.charAt(0) + noX(str.substring(1));
+    
+}
+ 
+#array6
+-return true if array has number = 6, else false
+-approach -> check if curr index in arr, is 6, if yes, return true, 
+           -> else keep checking till end of array is reached
+ 
+public boolean array6(int[] nums, int index) {
+  if(index >= nums.length) 
+    return false;
+  
+  if(nums[index] == 6) 
+    return true;
+    
+  return array6(nums, index+1);
+}
+
+#array11
+-return no of times 11 is present in array
+-approach -> check if curr index in arr, is 11, if yes, return 1 + recursively check for remaining array
+          -> keep checking till end of array is reached
+ 
+public int array11(int[] nums, int index) {
+  if(index >= nums.length) 
+    return 0;
+  
+  if(nums[index] == 11) 
+    return 1 + array11(nums, index+1);
+    
+  return array11(nums, index+1);
+}
+
