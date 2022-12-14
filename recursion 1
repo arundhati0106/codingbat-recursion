@@ -108,7 +108,11 @@ public String allStar(String str) {
 } 
 
 #pairStar
-
+-identical chars that are adjacent in the original string are separated from each other by a "*"
+-approach -> if string length = 1, i.e. has only 1 element, cant check for adjacent char at (1), null pointer exc, so return string
+          -> if adj chars are equal, add '*' after 0th char,
+          -> if not, add 1st char, and recursively check for remaining string
+          
 public String pairStar(String str) {
   if(str.length() <= 1) return str;
   
