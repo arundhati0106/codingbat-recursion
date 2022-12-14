@@ -84,3 +84,22 @@ public int array11(int[] nums, int index) {
   return array11(nums, index+1);
 }
 
+#array220
+-return true if the array contains a value followed by that value, times 10, in the array, somewhere.
+-approach -> since 2 indices are being checked at once, as soon as index+1 is at last index, return false
+          -> recursively check if ele at index = ele at index + 1 times 10, if yes, return true, if not, recursively check for next 2 ele
+          
+public boolean array220(int[] nums, int index) {
+  if(index+1 >= nums.length) return false;
+  
+  return nums[index]*10 == nums[index+1] || array220(nums, index+1);
+}
+
+#allstar
+
+public String allStar(String str) {
+  if(str.length() <= 1)
+    return str;
+          
+  return str.charAt(0) + "*" + allStar(str.substring(1));
+} 
