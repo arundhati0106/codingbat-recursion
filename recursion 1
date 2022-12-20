@@ -122,3 +122,22 @@ public String pairStar(String str) {
   return str.charAt(0) + pairStar(str.substring(1));
 }
 
+#endX
+-recursively compute a new string where all the lowercase 'x' chars have been moved to the end of the string.
+-approach -> if string length < 2, or null, returns ir
+          -> if first char in string is 'x', call func for string from next char, and add x 
+          -> else, add that char, and recursively call for remaining string
+          
+public String endX(String str) {
+    if(str.length() <= 1 || str == null)
+        return str;
+
+    //if we encounter x, recursively check for next character, and add x to the end
+    if(str.charAt(0) == 'x')
+        return endX(str.substring(1)) + 'x';
+
+    //if we encounter any other character, add that first, and then check for remaining string
+    return str.charAt(0) + endX(str.substring(1));
+}
+
+
