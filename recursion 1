@@ -140,4 +140,70 @@ public String endX(String str) {
     return str.charAt(0) + endX(str.substring(1));
 }
 
+#countPairs
+-compute the number of pairs of characters, separated by another character in the given string.
+-approach -> least no of characters required for str to have atleast 1 pair = 3, so if length < 3, return 0
+          -> if characters at 0th and 2nd index is same, add 1, and check for substring from next char
+          -> else just check from next char
+          
+public int countPairs(String str) {
+  if(str.length() < 3 || str == null)
+    return 0;
+    
+  if(str.charAt(0) == str.charAt(2))
+    return 1 + countPairs(str.substring(1));
+    
+  return countPairs(str.substring(1));
+}
+
+#countAbc
+-Count recursively the total number of "abc" and "aba" substrings that appear in the given string.
+-approach -> since string to be chacked with has 3 chars, if given string has < 3 characters, return 0
+          -> if first 3 characters (substring from 0th index, of 3 length) equals either "abc" or "aba", return 1 + continue checking for remaining string
+          else, just chcek for remaining substring.
+          
+public int countAbc(String str) {
+  if(str.length() < 3 || str == null)
+    return 0;
+    
+  if(str.substring(0, 3).equals("aba") || str.substring(0, 3).equals("abc"))
+    return 1 + countAbc(str.substring(1));
+    
+  return countAbc(str.substring(1));
+}
+
+#count11
+-compute recursively the number of "11" substrings in the string. The "11" substrings should not overlap.
+-approach -> since "11" has 2 chars, if given string's length < 2, return 0
+          -> if first two chars in string = "11", add 1, and check for substring starting from 2nd char, to avoid overlap
+          -> else, check for substring starting from next char
+          
+public int count11(String str) {
+  if(str.length() < 2 || str == null)
+    return 0;
+    
+  if(str.substring(0, 2).equals("11"))
+    return 1 + count11(str.substring(2));
+    
+  return count11(str.substring(1));
+}
+
+#stringClean
+-remove adjacenet duplicates from a string. "yyzzza" yields "yza".
+-approach -> if first two chars are same, check from next char
+          -> else, add that char, and check for remaining string
+          
+public String stringClean(String str) {
+  if(str.length() == 1 || str == null)
+    return str;
+    
+  if(str.charAt(0) == str.charAt(1))
+    return stringClean(str.substring(1));
+    
+  return str.charAt(0) + stringClean(str.substring(1));
+}
+
+
+
+
 
