@@ -254,22 +254,76 @@ public String parenBit(String str) {
 }
 
 #nestParen
+-Given a string, return true if it is a nesting of zero or more pairs of parenthesis, like "(())" or "((()))". 
+-approach -> if length of string is 0, return true, i.e string checking is finished
+          -> check if first char of string is '(', and last is ')', 
+          -> if yes, recursively check for remaining string,
+          -> if no, return false
 
 public boolean nestParen(String str) {
-  int n = str.length();
+  if(str.length() == 0)
+    return true;
+    
+  if(str.charAt(0) =='(' && str.charAt(str.length()-1) == ')')
+    return nestParen(str.substring(1,str.length()-1));
   
-  //all chars are checked, or string is null
-  if(n == 0) return true;
-
-  if(str.charAt(0) == '(' && str.charAt(n - 1) == ')')
-    return nestParen(str.substring(1, n - 1));
-
-  return false;
+  return false;  
 }
 
+#strCount
+-Given a string and a non-empty substring sub, compute recursively the number of times that sub appears in the string, without the sub strings overlapping
+-approach -> if str length is less than sub's length, return 0, as sub can't exist in a string of lesser length
+          -> if sub is present at 0th index, return 1 + recursively check for remaining string
+          -> else, check for remaining string, from next char.
+          
+public int strCount(String str, String sub) {
+  if(str.length() < sub.length())
+     return 0;
+     
+  if(str.substring(0, sub.length()).equals(sub))
+    return 1 + strCount(str.substring(sub.length()), sub);
+  
+  return strCount(str.substring(1), sub);
+}
 
+#strCopies
+-Given a string and a non-empty substring sub, compute recursively if at least n copies of sub appear in the string somewhere, possibly with overlapping. 
+-approach -> if n equals 0, return true, i.e. all chars checked.
+          -> if sub length is more than string length, return false
+          -> if sub is present at 0th index in str, check for remaining string, it should have n-1 times sub.
+          -> else, check for remaining string, with n times sub.
 
+public boolean strCopies(String str, String sub, int n) {
+    if(n == 0)
+        return true;
 
+    if(str.length() < sub.length())
+        return false;
 
+    if(str.substring(0, sub.length()).equals(sub))
+        return strCopies(str.substring(1), sub, n-1);
+
+    return strCopies(str.substring(1), sub, n);
+}
+
+#strDist
+-Given a string and a non-empty substring sub, compute recursively the largest substring which starts and ends with sub and return its length.
+-approach -> if sub length > str length, return 0
+          -> if sub is present at 0th index, and also the last word (at index = str length - sub length), return entire str
+          -> if sub is not the first word, check for remaining substring, i.e from 1st index
+          ->if sub is not the last word, keep trimming letters from word, and checking in them.
+
+public int strDist(String str, String sub) {
+    if(str.length() < sub.length())
+        return 0;
+
+    if(str.substring(0, sub.length()).equals(sub) && str.substring(str.length() - sub.length()).equals(sub))
+        return str.length();
+
+    if(!str.substring(0, sub.length()).equals(sub))
+        return strDist(str.substring(1), sub);
+
+    return strDist(str.substring(0, str.length()-1), sub);
+}
 
 
